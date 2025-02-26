@@ -1,9 +1,85 @@
 services:
 
+  order-db:
+    image: mongo:latest
+    container_name: order-db
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    networks:
+      - orchestrator-saga
+    volumes:
+      - order-db-data:/data/db
+  
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8082:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: order-db
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+      ME_CONFIG_BASICAUTH: "false"
+    networks:
+      - orchestrator-saga
+    depends_on:
+      - order-db
+
+
+  product-db:
+    image: postgres:latest
+    container_name: product-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=product
+    networks:
+      - orchestrator-saga
+    volumes:
+      - product-db-data:/var/lib/postgresql/data
+
+  payment-db:
+    image: postgres:latest
+    container_name: payment-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=payment
+    networks:
+      - orchestrator-saga
+    volumes:
+      - payment-db-data:/var/lib/postgresql/data
+
+  inventory-db:
+    image: postgres:latest
+    container_name: inventory-db
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=inventory
+    networks:
+      - orchestrator-saga
+    volumes:
+      - inventory-db-data:/var/lib/postgresql/data
+
   kafka:
     container_name: kafka
     image: obsidiandynamics/kafka
-    restart: "no"
+    platform: linux/amd64
+    restart: no
     ports:
       - "2181:2181"
       - "9092:9092"
@@ -19,11 +95,11 @@ services:
       KAFKA_RESTART_DELAY: "5"
       ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL: "0"
     volumes:
-      - ./data/kafka/data:/var/lib/kafka/data
+      - kafka-data:/var/lib/kafka/data
 
   redpanda-console:
     container_name: redpanda
-    image: docker.redpanda.com/vectorized/console:latest
+    image: redpandadata/console:latest
     restart: on-failure
     entrypoint: /bin/sh
     command: -c "echo \"$$CONSOLE_CONFIG_FILE\" > /tmp/config.yml; /app/console"
@@ -42,3 +118,10 @@ services:
 networks:
   orchestrator-saga:
     driver: bridge
+
+volumes:
+    order-db-data:
+    product-db-data:
+    payment-db-data:
+    inventory-db-data:
+    kafka-data:
