@@ -1,2 +1,21 @@
 server:
   port: 8090
+
+spring:
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:product}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+    hikari:
+      connection-timeout: 10000 # 10 seconds to wait for a connection from the pool
+      maximum-pool-size: 5      # Maximum number of connections in the pool
+      minimum-idle: 1           # Minimum idle connections in the pool
+      idle-timeout: 60000       # 60 seconds to keep a connection idle in the pool
+      max-lifetime: 1800000     # 30 minutes to keep a connection in the pool
+      pool-name: HikariCP
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
