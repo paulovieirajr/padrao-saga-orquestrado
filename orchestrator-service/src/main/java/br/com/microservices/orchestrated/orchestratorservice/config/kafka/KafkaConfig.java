@@ -15,7 +15,7 @@ import org.springframework.kafka.core.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static br.com.microservices.orchestrated.orchestratorservice.enums.Topic.*;
+import static br.com.microservices.orchestrated.orchestratorservice.core.enums.Topic.*;
 
 @EnableKafka
 @Configuration
@@ -86,7 +86,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic finishSuccessTopic() {
-        return buildTopic(FINISH_SUCESS.getTopic());
+        return buildTopic(FINISH_SUCCESS.getTopic());
     }
 
     @Bean
