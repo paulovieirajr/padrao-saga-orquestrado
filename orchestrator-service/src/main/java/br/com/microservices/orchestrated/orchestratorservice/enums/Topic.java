@@ -5,21 +5,21 @@ public enum Topic {
     BASE_ORCHESTRATOR("orchestrator"),
     FINISH_SUCESS("finish-sucess"),
     FINISH_FAIL("finish-fail"),
-    PRODUCT_VALIDATION_SUCESS("product-validation-sucess"),
+    PRODUCT_VALIDATION_SUCCESS("product-validation-sucess"),
     PRODUCT_VALIDATION_FAIL("product-validation-fail"),
-    PAYMENT_SUCESS("payment-sucess"),
+    PAYMENT_SUCCESS("payment-sucess"),
     PAYMENT_FAIL("payment-fail"),
-    INVENTORY_SUCESS("inventory-sucess"),
+    INVENTORY_SUCCESS("inventory-sucess"),
     INVENTORY_FAIL("inventory-fail"),
     NOTIFY_ENDING("notify-ending");
 
-    private String name;
+    private final String topic;
 
-    Topic(String name) {
-        this.name = name;
+    Topic(String topic) {
+        this.topic = topic;
     }
 
-    public String getName() {
-        return name;
+    public String getTopic() {
+        return topic;
     }
 }
