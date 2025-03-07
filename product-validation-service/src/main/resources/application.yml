@@ -5,17 +5,37 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_DATABASE:product}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_DATABASE:product}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
 
-    hikari:
-      connection-timeout: 10000 # 10 seconds to wait for a connection from the pool
-      maximum-pool-size: 5      # Maximum number of connections in the pool
-      minimum-idle: 1           # Minimum idle connections in the pool
-      idle-timeout: 60000       # 60 seconds to keep a connection idle in the pool
-      max-lifetime: 1800000     # 30 minutes to keep a connection in the pool
-      pool-name: HikariCP
+  hikari:
+    connection-timeout: 10000 # 10 seconds to wait for a connection from the pool
+    maximum-pool-size: 5      # Maximum number of connections in the pool
+    minimum-idle: 1           # Minimum idle connections in the pool
+    idle-timeout: 60000       # 60 seconds to keep a connection idle in the pool
+    max-lifetime: 1800000     # 30 minutes to keep a connection in the pool
+    pool-name: HikariCP
+
   jpa:
     hibernate:
       ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:localhost:9092}
+    topic:
+      orchestrator: orchestrator
+      product-validation-success: product-validation-success
+      product-validation-fail: product-validation-fail
+    consumer:
+      group-id: product-validation-group
+      auto-offset-reset: latest
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF
