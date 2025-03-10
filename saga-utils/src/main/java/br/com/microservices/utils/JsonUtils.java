@@ -2,6 +2,7 @@ package br.com.microservices.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,7 @@ public final class JsonUtils<T> {
     private final Class<T> type;
 
     public JsonUtils(Class<T> type) {
+        objectMapper.registerModule(new JavaTimeModule());
         this.type = type;
     }
 
