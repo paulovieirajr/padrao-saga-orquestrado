@@ -1,6 +1,6 @@
-package br.com.microservices.orchestrated.orderservice.config.utils;
+package br.com.microservices.orchestrated.orchestratorservice.utils;
 
-import br.com.microservices.dto.services.Event;
+import br.com.microservices.dto.orchestrated.Event;
 import br.com.microservices.utils.JsonUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

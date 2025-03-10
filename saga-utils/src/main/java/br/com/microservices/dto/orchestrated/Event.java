@@ -1,6 +1,8 @@
-package io.github.paulovieirajr.dto.services;
+package br.com.microservices.dto.orchestrated;
 
-import io.github.paulovieirajr.dto.Order;
+import br.com.microservices.dto.Order;
+import br.com.microservices.enums.EventSource;
+import br.com.microservices.enums.SagaStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,8 +12,8 @@ public record Event(
         String transactionId,
         String orderId,
         Order payload,
-        String source,
-        String status,
+        EventSource source,
+        SagaStatus status,
         List<History> eventHistory,
         LocalDateTime createdAt
 ) {

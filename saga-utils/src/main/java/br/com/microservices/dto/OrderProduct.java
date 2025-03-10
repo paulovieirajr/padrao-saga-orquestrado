@@ -1,4 +1,4 @@
-package io.github.paulovieirajr.dto;
+package br.com.microservices.dto;
 
 public record OrderProduct(
         Product product,

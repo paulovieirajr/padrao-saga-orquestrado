@@ -1,4 +1,4 @@
-package io.github.paulovieirajr.exception;
+package br.com.microservices.exception;
 
 public class ValidationException extends RuntimeException {
     public ValidationException(String message) {

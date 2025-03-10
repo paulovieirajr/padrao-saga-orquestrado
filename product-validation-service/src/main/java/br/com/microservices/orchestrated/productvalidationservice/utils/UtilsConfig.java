@@ -1,4 +1,4 @@
-package br.com.microservices.orchestrated.orderservice.config.utils;
+package br.com.microservices.orchestrated.productvalidationservice.utils;
 
 import br.com.microservices.dto.services.Event;
 import br.com.microservices.utils.JsonUtils;

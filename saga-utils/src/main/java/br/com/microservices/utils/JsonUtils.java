@@ -1,4 +1,4 @@
-package io.github.paulovieirajr.utils;
+package br.com.microservices.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

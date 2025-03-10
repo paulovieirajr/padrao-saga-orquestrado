@@ -1,4 +1,4 @@
-package io.github.paulovieirajr.enums;
+package br.com.microservices.enums;
 
 public enum Topic {
     START_SAGA("start-saga"),

@@ -6,7 +6,11 @@ plugins {
 
 group = 'br.com.microservices.orchestrated'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '21'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
 
 configurations {
 	compileOnly {
@@ -15,13 +19,14 @@ configurations {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.kafka:spring-kafka'
-	implementation 'io.github.paulovieirajr:saga-utils'
+	implementation 'br.com.microservices:saga-utils:0.0.3'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

@@ -1,4 +1,4 @@
-package io.github.paulovieirajr.dto.services;
+package br.com.microservices.dto.services;
 
 import java.time.LocalDateTime;
 
