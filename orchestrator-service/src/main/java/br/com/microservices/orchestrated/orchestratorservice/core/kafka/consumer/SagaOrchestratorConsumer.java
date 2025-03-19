@@ -1,15 +1,15 @@
 package br.com.microservices.orchestrated.orchestratorservice.core.kafka.consumer;
 
-import br.com.microservices.dto.orchestrated.Event;
-import br.com.microservices.utils.JsonUtils;
+import io.github.javawinds.dto.orchestrated.Event;
+import io.github.javawinds.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import static br.com.microservices.enums.Microservice.ORCHESTRATOR;
-import static br.com.microservices.enums.Topic.*;
-import static br.com.microservices.log.CustomLog.RECEIVED_EVENT_LOG;
+import static io.github.javawinds.enums.Microservice.ORCHESTRATOR;
+import static io.github.javawinds.enums.Topic.*;
+import static io.github.javawinds.log.CustomLog.RECEIVED_EVENT_LOG;
 
 @Component
 public class SagaOrchestratorConsumer {

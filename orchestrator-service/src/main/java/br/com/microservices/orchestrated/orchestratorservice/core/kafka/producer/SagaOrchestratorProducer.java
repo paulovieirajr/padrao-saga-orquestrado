@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import static br.com.microservices.enums.Microservice.ORCHESTRATOR;
-import static br.com.microservices.log.CustomLog.FAILED_EVENT_LOG;
-import static br.com.microservices.log.CustomLog.SEND_EVENT_LOG;
+import static io.github.javawinds.enums.Microservice.ORCHESTRATOR;
+import static io.github.javawinds.log.CustomLog.FAILED_EVENT_LOG;
+import static io.github.javawinds.log.CustomLog.SEND_EVENT_LOG;
 
 @Component
 public class SagaOrchestratorProducer {
