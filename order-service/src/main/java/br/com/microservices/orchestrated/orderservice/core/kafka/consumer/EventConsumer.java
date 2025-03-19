@@ -1,16 +1,15 @@
 package br.com.microservices.orchestrated.orderservice.core.kafka.consumer;
 
-import br.com.microservices.dto.services.Event;
-import br.com.microservices.enums.Topic;
-import br.com.microservices.utils.JsonUtils;
+import io.github.javawinds.dto.services.Event;
+import io.github.javawinds.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import static br.com.microservices.enums.Microservice.ORDER_SERVICE;
-import static br.com.microservices.enums.Topic.NOTIFY_ENDING;
-import static br.com.microservices.log.CustomLog.RECEIVED_EVENT_LOG;
+import static io.github.javawinds.enums.Microservice.ORDER_SERVICE;
+import static io.github.javawinds.enums.Topic.NOTIFY_ENDING;
+import static io.github.javawinds.log.CustomLog.RECEIVED_EVENT_LOG;
 
 @Component
 public class EventConsumer {

@@ -1,7 +1,7 @@
 package br.com.microservices.orchestrated.orchestratorservice.utils;
 
-import br.com.microservices.dto.orchestrated.Event;
-import br.com.microservices.utils.JsonUtils;
+import io.github.javawinds.dto.orchestrated.Event;
+import io.github.javawinds.utils.JsonUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

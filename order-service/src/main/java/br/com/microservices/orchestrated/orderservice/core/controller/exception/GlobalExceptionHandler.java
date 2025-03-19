@@ -1,6 +1,6 @@
 package br.com.microservices.orchestrated.orderservice.core.controller.exception;
 
-import br.com.microservices.exception.ValidationException;
+import io.github.javawinds.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;

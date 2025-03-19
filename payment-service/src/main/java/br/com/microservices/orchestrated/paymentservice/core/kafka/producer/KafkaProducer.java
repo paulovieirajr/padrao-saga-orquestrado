@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import static br.com.microservices.enums.Microservice.PAYMENT_SERVICE;
-import static br.com.microservices.log.CustomLog.FAILED_EVENT_LOG;
-import static br.com.microservices.log.CustomLog.SEND_EVENT_LOG;
+import static io.github.javawinds.enums.Microservice.PAYMENT_SERVICE;
+import static io.github.javawinds.log.CustomLog.FAILED_EVENT_LOG;
+import static io.github.javawinds.log.CustomLog.SEND_EVENT_LOG;
 
 @Component
 public class KafkaProducer {
