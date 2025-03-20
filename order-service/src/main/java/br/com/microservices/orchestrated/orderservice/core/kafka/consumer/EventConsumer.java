@@ -1,6 +1,7 @@
 package br.com.microservices.orchestrated.orderservice.core.kafka.consumer;
 
-import io.github.javawinds.dto.services.Event;
+import br.com.microservices.orchestrated.orderservice.core.document.Event;
+import br.com.microservices.orchestrated.orderservice.core.service.EventService;
 import io.github.javawinds.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,11 @@ public class EventConsumer {
 
     public static final Logger LOG = LoggerFactory.getLogger(EventConsumer.class);
 
+    private final EventService eventService;
     private final JsonUtils<Event> jsonUtils;
 
-    public EventConsumer(JsonUtils<Event> jsonUtils) {
+    public EventConsumer(EventService eventService, JsonUtils<Event> jsonUtils) {
+        this.eventService = eventService;
         this.jsonUtils = jsonUtils;
     }
 
@@ -29,6 +32,6 @@ public class EventConsumer {
     public void consumeNotifyEndingEvent(String payload) {
         LOG.info(RECEIVED_EVENT_LOG.getMessage(), ORDER_SERVICE.getMicroservice(), NOTIFY_ENDING.getTopic(), payload);
         var event = jsonUtils.toType(payload);
-        event.ifPresent(e -> LOG.info("Event received successfully: {}", e));
+        event.ifPresent(eventService::notifyEnding);
     }
 }
