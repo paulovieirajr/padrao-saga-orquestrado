@@ -1,5 +1,6 @@
 package br.com.microservices.orchestrated.productvalidationservice.core.kafka.consumer;
 
+import br.com.microservices.orchestrated.productvalidationservice.core.service.ProductValidationService;
 import io.github.javawinds.dto.services.Event;
 import io.github.javawinds.utils.JsonUtils;
 import org.slf4j.Logger;
@@ -18,9 +19,11 @@ public class ProductValidationConsumer {
     public static final Logger LOG = LoggerFactory.getLogger(ProductValidationConsumer.class);
 
     private final JsonUtils<Event> jsonUtils;
+    private final ProductValidationService productValidationService;
 
-    public ProductValidationConsumer(JsonUtils<Event> jsonUtils) {
+    public ProductValidationConsumer(JsonUtils<Event> jsonUtils, ProductValidationService productValidationService) {
         this.jsonUtils = jsonUtils;
+        this.productValidationService = productValidationService;
     }
 
     @KafkaListener(
@@ -30,7 +33,7 @@ public class ProductValidationConsumer {
     public void consumeSuccessEvent(String payload) {
         LOG.info(RECEIVED_EVENT_LOG.getMessage(), PRODUCT_VALIDATION_SERVICE.getMicroservice(), PRODUCT_VALIDATION_SUCCESS.getTopic(), payload);
         var event = jsonUtils.toType(payload);
-        event.ifPresent(e -> LOG.info("Event received successfully: {}", e));
+        event.ifPresent(productValidationService::validateExistingProducts);
     }
 
     @KafkaListener(
@@ -40,6 +43,6 @@ public class ProductValidationConsumer {
     public void consumeFailEvent(String payload) {
         LOG.info(RECEIVED_EVENT_LOG.getMessage(), PRODUCT_VALIDATION_SERVICE.getMicroservice(), PRODUCT_VALIDATION_FAIL.getTopic(), payload);
         var event = jsonUtils.toType(payload);
-        event.ifPresent(e -> LOG.info("Event received with failure: {}", e));
+        event.ifPresent(productValidationService::rollbackEvent);
     }
 }
